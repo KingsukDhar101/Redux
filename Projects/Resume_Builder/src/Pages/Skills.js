@@ -1,63 +1,87 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import BaseStyles from "../Styles/base.module.css";
 import Styles from "../Styles/skills.module.css";
+import { v4 as uuidv4 } from "uuid";
+import { useDispatch, useSelector } from "react-redux";
+import {skillAction} from '../Actions/action';
 
 export default function Skills() {
+  const dispatch = useDispatch();
+  const {skillReducer} = useSelector(state => state);
+  const [skillData, setSkillData] = useState(skillReducer);
+
+  function handleOnChange(e, id) {
+    let prevObj = skillData.find(item => item.id == id);
+    prevObj.skill = e.target.value;
+    setSkillData([...skillData]);
+  }
+
+  function addSkillHandler() {
+    // console.log(`Count : ${count}`);
+    // skillData.push({
+    //   id: skillData.length+1,
+    //   skill: ""
+    // });
+    // let { value } = e.target;
+    setSkillData([...skillData, { id: uuidv4(), skill: "" }]);
+  }
+  function deleteSkillHandler(id) {
+    console.log(id);
+    const newArr = skillData.filter((ele) => ele.id != id);
+    // console.log(newArr);
+    setSkillData(newArr);
+  }
+  function submitSkills(){
+    dispatch(skillAction(skillData));
+  }
+  useEffect(() => {
+    console.log(skillData);
+  }, [skillData]);
   return (
     <div>
       <div className={BaseStyles.leftContainer}>
         <h4>Skills</h4>
         <p>Add a few skills to show employers what you're good at.</p>
 
-        <div className={Styles.rowContainer}>
-          <div className={Styles.hash}>#</div>
-          <div className={Styles.inputContainer}>
-            <input
-              className={Styles.inputBoxSkill}
-              type="text"
-              placeholder="Skill1"
-            />
-            <i class="material-icons">delete</i>
-          </div>
+        <div>
+          {skillData.map((ele) => {
+            return (
+              <div key={ele.id} className={Styles.rowContainer}>
+                <div className={Styles.hash}>#</div>
+                <div className={Styles.inputContainer}>
+                  <input
+                    className={Styles.inputBoxSkill}
+                    type="text"
+                    placeholder="Skill"
+                    value={ele.skill}
+                    onChange={(e) => {
+                      handleOnChange(e, ele.id);
+                    }}
+                  />
+                  <i
+                    className="material-icons"
+                    onClick={() => {
+                      deleteSkillHandler(ele.id);
+                    }}
+                  >
+                    delete
+                  </i>
+                </div>
+              </div>
+            );
+          })}
         </div>
-        <div className={Styles.rowContainer}>
-          <div className={Styles.hash}>#</div>
-          <div className={Styles.inputContainer}>
-            <input
-              className={Styles.inputBoxSkill}
-              type="text"
-              placeholder="Skill2"
-            />
-            <i class="material-icons">delete</i>
-          </div>
-        </div>
-        <div className={Styles.rowContainer}>
-          <div className={Styles.hash}>#</div>
-          <div className={Styles.inputContainer}>
-            <input
-              className={Styles.inputBoxSkill}
-              type="text"
-              placeholder="Skill3"
-            />
-            <i class="material-icons">delete</i>
-          </div>
-        </div>
-        <div className={Styles.rowContainer}>
-          <div className={Styles.hash}>#</div>
-          <div className={Styles.inputContainer}>
-            <input
-              className={Styles.inputBoxSkill}
-              type="text"
-              placeholder="Skill4"
-            />
-            <i class="material-icons">delete</i>
-          </div>
+
+        <div className={Styles.addSkillContainer}>
+          <p className={Styles.addSkill} onClick={addSkillHandler}>
+            Add new skills
+          </p>
         </div>
 
         <div className={BaseStyles.pageSlider}>
           <Link to="/summary">
-            <button className={BaseStyles.submitBtn}>SAVE & CONTINUE</button>
+            <button className={BaseStyles.submitBtn} onClick={submitSkills}>SAVE & CONTINUE</button>
           </Link>
 
           <div className={BaseStyles.back}>

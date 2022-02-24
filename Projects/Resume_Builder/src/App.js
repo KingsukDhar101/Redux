@@ -10,7 +10,8 @@ import Education from "./Pages/Education";
 import Skills from "./Pages/Skills";
 import Summary from "./Pages/Summary";
 import FinalizePage from "./Pages/FinalizePage";
-
+import store from "./store";
+import { Provider } from "react-redux";
 import "./App.css";
 
 function App() {
@@ -18,19 +19,21 @@ function App() {
     <div className="App">
       <Router>
         <Layout>
-          <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/contact" element={<ContactInfo />} />
-            <Route path="/experience" element={<Experience />} />
-            <Route path="/education" element={<Education />} />
-            <Route path="/skills" element={<Skills />} />
-            <Route path="/summary" element={<Summary />} />
-            <Route path="/finalize-page" element={<FinalizePage />} />
+          <Provider store={store}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/contact" element={<ContactInfo />} />
+              <Route path="/experience" element={<Experience />} />
+              <Route path="/education" element={<Education />} />
+              <Route path="/skills" element={<Skills />} />
+              <Route path="/summary" element={<Summary />} />
+              <Route path="/finalize-page" element={<FinalizePage />} />
 
-            {/* <Route path="/howto" element={<Howto />} />
+              {/* <Route path="/howto" element={<Howto />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} /> */}
-          </Routes>
+            </Routes>
+          </Provider>
         </Layout>
       </Router>
     </div>

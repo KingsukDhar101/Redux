@@ -1,34 +1,28 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import styles from '../../Styles/header.module.css'
+import React from "react";
+import { Link } from "react-router-dom";
+import Styles from "../../Styles/header.module.css";
 
 export default function Header() {
-    return (
-        <>
-            <div className={styles.logo}>
-                <Link to="/">
+  return (
+    <div className={Styles.headerContainer}>
+      <Link to="/">
+        <div className={Styles.logo}>ResumeCreator</div>
+      </Link>
 
-                    <i className="fa fa-file-text-o" style={{ fontSize: "40px", color: "blue" }}></i>
-                </Link>
-            </div>
-            <div className={styles.contents}>
-                <div>
-                    Resume Templates
-                </div>
-                <div>
-                    About Us
-                </div>
-                <div className={styles.signupbtn}>
-                    <Link to='/signup' style={{ textDecoration: "none" }}>
-                        Register
-                    </Link>
-                </div>
-                <div className={styles.loginbtn}>
-                    <Link to='/login' style={{ textDecoration: "none" }}>
-                        Login
-                    </Link>
-                </div>
-            </div>
-        </>
-    )
+      <div className={Styles.contents}>
+        <Link to="/signup" style={{ textDecoration: "none" }}>
+          <div className={Styles.hLink}>Resume Templates</div>
+        </Link>
+        <Link to="/signup" style={{ textDecoration: "none" }}>
+          <div className={Styles.hLink}>About Us</div>
+        </Link>
+        <Link to="/signup" style={{ textDecoration: "none" }}>
+          <div className={Styles.hLink}>Signup</div>
+        </Link>
+        <Link to="/signup" style={{ textDecoration: "none" }}>
+          <div className={Styles.hLink}>Login</div>
+        </Link>
+      </div>
+    </div>
+  );
 }

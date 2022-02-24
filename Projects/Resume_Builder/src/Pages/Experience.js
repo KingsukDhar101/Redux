@@ -1,10 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { experienceAction } from "../Actions/action";
 import BaseStyles from "../Styles/base.module.css";
 import Styles from "../Styles/experience.module.css";
 
 export default function Experience() {
+  const dispatch = useDispatch();
+  const { experienceReducer } = useSelector((state) => state);
+  const [experience, setExperience] = useState(experienceReducer);
+  const [checkvalue, setCheckvalue] = useState(true);
+  // const [sample, setSample] = useState("");
+
+  function handleOnChange(e) {
+    let { id, value } = e.target;
+    setExperience({
+      ...experience,
+      [id]: value,
+    });
+  }
+  function submitExperience() {
+    dispatch(experienceAction(experience));
+  }
+  function checkFunc() {
+    setCheckvalue((prevState) => !prevState);
+  }
+  useEffect(() => {
+    // console.log("Experience-Data: ", experienceReducer);
+    // console.log("check : ", checkvalue);
+  }, []);
   return (
     <div>
       <div className={BaseStyles.leftContainer}>
@@ -12,81 +36,163 @@ export default function Experience() {
         <p>Start with your most recent position</p>
         <div className={Styles.title}>
           <div className={Styles.titleName}>Job Title</div>
-          <input className={Styles.inputBox} type="text" />
+          <input
+            className={Styles.inputBox}
+            type="text"
+            id="jobtitle"
+            onChange={handleOnChange}
+          />
         </div>
         <div className={Styles.title}>
           <div className={Styles.titleName}>Company</div>
-          <input className={Styles.inputBox} type="text" />
+          <input
+            className={Styles.inputBox}
+            type="text"
+            id="company"
+            onChange={handleOnChange}
+          />
         </div>
         <div className={Styles.title}>
           <div className={Styles.titleName}>City/Town</div>
-          <input className={Styles.inputBox} type="text" />
+          <input
+            className={Styles.inputBox}
+            type="text"
+            id="city"
+            onChange={handleOnChange}
+          />
         </div>
         <div className={Styles.title}>
           <div className={Styles.titleName}>Country</div>
-          <input className={Styles.inputBox} type="text" />
+          <input
+            className={Styles.inputBox}
+            type="text"
+            id="country"
+            onChange={handleOnChange}
+          />
         </div>
 
         <div className={Styles.titleName}>Start Date</div>
         <div className={Styles.dateContainer}>
           <div className={Styles.month}>
-            <input
-              list="months"
+            <select
+              
               name="month"
               className={Styles.smalltext}
               placeholder="month"
-            />
-            <datalist id="months">
-              <option value="month" />
-              <option value="January" />
-              <option value="February" />
-              <option value="March" />
-              <option value="April" />
-              <option value="May" />
-              <option value="June" />
-              <option value="July" />
-              <option value="August" />
-              <option value="September" />
-              <option value="October" />
-              <option value="November" />
-              <option value="December" />
-            </datalist>
+              id="startmonth"
+              onChange={handleOnChange}
+            >
+              <option value="month">month</option>
+              <option value="January">January</option>
+              <option value="February">February</option>
+              <option value="March">March</option>
+              <option value="April">April</option>
+              <option value="May">May</option>
+              <option value="June">June</option>
+              <option value="July">July</option>
+              <option value="August">August</option>
+              <option value="September">September</option>
+              <option value="October">October</option>
+              <option value="November">November</option>
+              <option value="December">December</option>
+            </select>
           </div>
           <div className={Styles.year}>
-            <input
-              list="years"
+            <select
+              
               name="year"
               className={Styles.smalltext}
               placeholder="year"
-            />
-            <datalist id="years">
-              <option value="year" />
-              <option value="2022" />
-              <option value="2021" />
-              <option value="2020" />
-              <option value="2019" />
-              <option value="2018" />
-              <option value="2017" />
-              <option value="2016" />
-              <option value="2015" />
-              <option value="2014" />
-              <option value="2013" />
-              <option value="2012" />
-              <option value="2011" />
-            </datalist>
+              id="startyear"
+              onChange={handleOnChange}
+            >
+              <option value="year">year</option>
+              <option value="2022">2022</option>
+              <option value="2021">2021</option>
+              <option value="2020">2020</option>
+              <option value="2019">2019</option>
+              <option value="2018">2018</option>
+              <option value="2017">2017</option>
+              <option value="2016">2016</option>
+              <option value="2015">2015</option>
+              <option value="2014">2014</option>
+              <option value="2013">2013</option>
+              <option value="2012">2012</option>
+              <option value="2011">2011</option>
+            </select>
           </div>
         </div>
 
+        {checkvalue ? (
+          <div>
+            <div className={Styles.titleName}>End Date</div>
+            <div className={Styles.dateContainer}>
+              <div className={Styles.month}>
+                <select
+                  
+                  name="month"
+                  className={Styles.smalltext}
+                  placeholder="month"
+                  id="endmonth"
+                  onChange={handleOnChange}
+                >
+                  <option value="month">month</option>
+                  <option value="January">January</option>
+                  <option value="February">February</option>
+                  <option value="March">March</option>
+                  <option value="April">April</option>
+                  <option value="May">May</option>
+                  <option value="June">June</option>
+                  <option value="July">July</option>
+                  <option value="August">August</option>
+                  <option value="September">September</option>
+                  <option value="October">October</option>
+                  <option value="November">November</option>
+                  <option value="December">December</option>
+                </select>
+              </div>
+              <div className={Styles.year}>
+                <select
+                 
+                  name="year"
+                  className={Styles.smalltext}
+                  placeholder="year"
+                  id="endyear"
+                  onChange={handleOnChange}
+                >
+                  <option value="year">year</option>
+                  <option value="2022">2022</option>
+                  <option value="2021">2021</option>
+                  <option value="2020">2020</option>
+                  <option value="2019">2019</option>
+                  <option value="2018">2018</option>
+                  <option value="2017">2017</option>
+                  <option value="2016">2016</option>
+                  <option value="2015">2015</option>
+                  <option value="2014">2014</option>
+                  <option value="2013">2013</option>
+                  <option value="2012">2012</option>
+                  <option value="2011">2011</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        ) : (
+          ""
+        )}
+
         <div className={Styles.checkBox}>
-          <input type="checkbox" id="checkWork" />
-          <label for="checkWork" className={Styles.titleName}>
+          <input type="checkbox" id="checkWork" onClick={checkFunc} />
+          <label htmlFor="checkWork" className={Styles.titleName}>
             Currenty Work Here
           </label>
         </div>
 
         <div className={BaseStyles.pageSlider}>
           <Link to="/education">
-            <button className={BaseStyles.submitBtn}>ENTER JOB DESCRIPTION</button>
+            <button className={BaseStyles.submitBtn} onClick={submitExperience}>
+              ENTER JOB DESCRIPTION
+            </button>
           </Link>
 
           <div className={BaseStyles.back}>
