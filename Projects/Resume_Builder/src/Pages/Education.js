@@ -73,7 +73,6 @@ export default function Education() {
         <div className={Styles.dateContainer}>
           <div className={Styles.month}>
             <select
-              id="months"
               name="month"
               className={Styles.smalltext}
               placeholder="month"

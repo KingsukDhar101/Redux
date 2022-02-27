@@ -30,6 +30,30 @@ function skillAction(skill) {
     payload: skill,
   };
 }
+function finalizeAction(final) {
+  return {
+    type: "final",
+    payload: final,
+  };
+}
+function colorAction(color) {
+  return {
+    type: "color",
+    payload: color,
+  };
+}
+function fontStyleAction(fontstyle) {
+  return {
+    type: "fontstyle",
+    payload: fontstyle,
+  };
+}
+function fontSizeAction(fontsize) {
+  return {
+    type: "fontsize",
+    payload: fontsize,
+  };
+}
 
 export {
   contactAction,
@@ -37,4 +61,8 @@ export {
   educationAction,
   summaryAction,
   skillAction,
+  finalizeAction,
+  colorAction,
+  fontStyleAction,
+  fontSizeAction,
 };

@@ -4,6 +4,9 @@ import { experienceReducer } from "./experienceReducer";
 import { educationReducer } from "./educationReducer";
 import { summaryReducer } from "./summaryReducer";
 import { skillReducer } from "./skillReducer";
+import { finalizeReducer } from "./finalizeReducer";
+import { colorReducer } from "./colorReducer";
+import { fontSizeReducer, fontStyleReducer } from "./fontReducer";
 
 const rootReducer = combineReducers({
   contactReducer,
@@ -11,6 +14,10 @@ const rootReducer = combineReducers({
   educationReducer,
   summaryReducer,
   skillReducer,
+  finalizeReducer,
+  colorReducer,
+  fontSizeReducer,
+  fontStyleReducer,
 });
 
 export default rootReducer;
