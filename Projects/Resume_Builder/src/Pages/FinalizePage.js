@@ -202,6 +202,7 @@ export default function FinalizePage() {
           </button>
 
           {finalizeReducer.sidebar==true ? <Sidebar /> : ""}
+          {}
         </div>
       </div>
     </div>
