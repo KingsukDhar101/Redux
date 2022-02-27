@@ -3,7 +3,7 @@ const initialState = {
   layout: "",
   fontstyle: "",
   fontsize: "",
-  template:1,
+  template:2,
   sidebar: false
 };
 

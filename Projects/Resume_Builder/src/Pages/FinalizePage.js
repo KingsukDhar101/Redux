@@ -38,8 +38,9 @@ export default function FinalizePage() {
   // const [color, setColor] = useState(colorReducer);
   const [fontsize, setFontsize] = useState(fontSizeReducer);
   const [fontstyle, setFontstyle] = useState(fontStyleReducer);
-  const [template, setTemplate] = useState(2);
+  // const [template, setTemplate] = useState(finalizeReducer.template);
   // const [sidebar, setSidebar] = useState(false);
+  let template = finalizeReducer.template;
 
   const allData = useSelector((state) => state);
   // console.log("Final Data: ", allData);
@@ -94,6 +95,8 @@ export default function FinalizePage() {
   const textClr = `${color}text`;
   const fontStl = finalData.fontstyle;
   const fontSz = finalData.fontsize ? finalData.fontsize : "small";
+
+  
 
   // console.log("COLOR coming from : " + bgClr);
   // console.log("Font Style : " + fontStl);

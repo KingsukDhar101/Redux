@@ -47,12 +47,10 @@ export default function Template2({
               <div className={` ${fontStl}`} style={{ marginBottom: "5px" }}>
                 {ex.jobtitle} Software Engineer
               </div>
-              <div className={``}>
-                <span className={`${fontStl}`}>
-                  {ex.company} | {ex.city}, {ex.country} Mercer Gurgaon ,
-                  Hariyana
-                </span>
-              </div>
+
+              <span className={`${fontStl}`}>
+                {ex.company} | {ex.city}, {ex.country} Mercer Gurgaon , Hariyana
+              </span>
             </div>
             <div className={Styles.right}>
               <div className={` ${fontStl}`}>
