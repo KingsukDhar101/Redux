@@ -95,30 +95,30 @@
 }
 
 .small .name {
-  font-size: 1.3em;
+  font-size: 1.8em;
 }
 .small .heading {
   font-size: 1em;
 }
 
 .medium {
-  font-size: 1em;
+  font-size: 0.97em;
 }
 .medium .name {
-  font-size: 1.4em;
+  font-size: 1.6em;
 }
 .medium .heading {
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 .large {
-  font-size: 1.2em;
+  font-size: 0.97em;
 }
 .large .name {
-  font-size: 1.6em;
+  font-size: 2em;
 }
 .large .heading {
-  font-size: 1.3em;
+  font-size: 1.2em;
 }
 
 .smallText {

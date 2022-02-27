@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Styles from "../Styles/finalizePage.module.css";
+import t2s from "../Styles/template2.module.css";
 export default function Template2({
   fontSz,
   bgClr,
@@ -15,30 +16,33 @@ export default function Template2({
   return (
     <>
       <div className={`${Styles.leftContainer}  ${fontSz}`}>
-        <div className={Styles.headingContainer}>
-          <div className={Styles.topContainer}>
+        <div className={t2s.headingContainer} style={{ display: "flex" }}>
+          <div className={t2s.nameContainer}>
             {/* <div className={`${Styles.nameLogo} ${bgClr}`}>KD</div> */}
-            <div className={`${Styles.name} ${textClr} ${fontStl} name`}>
-              Kingsuk Dhar
-            </div>
+            <div className={`${Styles.name} ${fontStl} name`}>Kingsuk Dhar</div>
           </div>
-          <div className={Styles.contactContainer}>
+          <div className={t2s.contactContainer} style={{ marginLeft: "auto" }}>
             <div className={` ${fontStl} `}>
-              {/* {cd.phoneno} | {cd.email} */}
-              1234567890 | kingsuK@gamil.com
+              {/* {cd.phoneno} */}
+              1234567890
             </div>
             <div className={` ${fontStl}`}>
-              {cd.address} | {cd.city}, {cd.country}
+              {/* {cd.email} */}
+              kingsuK@gamil.com
+            </div>
+            <div className={` ${fontStl}`}>{cd.address}</div>
+            <div className={` ${fontStl}`}>
+              {cd.city}, {cd.country}
             </div>
           </div>
         </div>
-        <div className={Styles.experienceContainer}>
+        <div className={t2s.experienceContainer}>
           <div
-            className={`${Styles.midHeading_left} ${textClr} ${fontStl} heading`}
+            className={`${Styles.midHeading_left} ${t2s.midHeading_left} ${textClr} ${fontStl} heading`}
           >
             EXPERIENCE
           </div>
-          <div className={Styles.exContentContainer}>
+          <div className={t2s.exContentContainer}>
             <div className={Styles.left}>
               <div className={` ${fontStl}`} style={{ marginBottom: "5px" }}>
                 {ex.jobtitle} Software Engineer
@@ -65,9 +69,9 @@ export default function Template2({
             </div>
           </div>
         </div>
-        <div className={Styles.skillContainer}>
+        <div className={t2s.experienceContainer}>
           <div
-            className={`${Styles.midHeading_left} ${textClr} ${fontStl} heading`}
+            className={`${Styles.midHeading_left} ${t2s.midHeading_left} ${textClr} ${fontStl} heading`}
           >
             SKILLS
           </div>
@@ -86,35 +90,39 @@ export default function Template2({
         </div>
 
         {/* Education container */}
-        <div className={Styles.experienceContainer}>
+        <div className={t2s.experienceContainer}>
           <div
-            className={`${Styles.midHeading_left} ${textClr} ${fontStl}  heading`}
+            className={`${Styles.midHeading_left} ${t2s.midHeading_left} ${textClr} ${fontStl}  heading`}
           >
             EDUCATION
           </div>
-          <div className={Styles.exContentContainer}>
+          <div className={t2s.exContentContainer}>
             <div className={Styles.left}>
               <div className={` ${fontStl}`} style={{ marginBottom: "5px" }}>
-                {edu.degree}
+                {edu.degree} degree
               </div>
               <div className={` ${fontStl}`}>
                 <span className={`${fontStl}`}>
                   {edu.school} | {edu.city}, {edu.country}
+                  school | city, country
                 </span>
               </div>
             </div>
-            <div className={Styles.right}>
+            <div className={t2s.right}>
               <div className={` ${fontStl}`}>
                 <span className={`${fontStl}`} style={{ marginBottom: "5px" }}>
                   {edu.gradmonth} {edu.gradyear}
+                  gradmonth gradyear
                 </span>
               </div>
             </div>
           </div>
         </div>
 
-        <div className={Styles.summaryContainer}>
-          <div className={`${Styles.midHeading_left} ${textClr} ${fontStl}`}>
+        <div className={t2s.experienceContainer}>
+          <div
+            className={`${Styles.midHeading_left} ${t2s.midHeading_left} ${textClr} ${fontStl} heading`}
+          >
             PROFESSIONAL SUMMARY
           </div>
           <div className={` ${fontStl}`} style={{ marginTop: "10px" }}>

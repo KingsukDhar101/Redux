@@ -8,6 +8,7 @@ import { colorAction } from "../Actions/action";
 import { fontSizeAction, fontStyleAction } from "../Actions/action";
 import Template1 from "./Template1";
 import Template2 from "./Template2";
+import Sidebar from "./Sidebar";
 
 export default function FinalizePage() {
   const colorArr = [
@@ -38,6 +39,8 @@ export default function FinalizePage() {
   const [fontsize, setFontsize] = useState(fontSizeReducer);
   const [fontstyle, setFontstyle] = useState(fontStyleReducer);
   const [template, setTemplate] = useState(2);
+  // const [sidebar, setSidebar] = useState(false);
+
   const allData = useSelector((state) => state);
   // console.log("Final Data: ", allData);
   const {
@@ -54,6 +57,8 @@ export default function FinalizePage() {
   const summary = summaryReducer;
   const sk = skillReducer;
 
+  // let sbopen = finalizeReducer.sidebar;
+
   const newSk = sk.filter((item) => item.skill !== "");
 
   function handleClick(e) {
@@ -64,6 +69,13 @@ export default function FinalizePage() {
     });
     dispatch(finalizeAction(finalData));
   }
+  function handleClickSidebar(e) {
+    let { name } = e.target;
+    setFinalData({
+      ...finalData,
+      [name]: true,
+    });
+  }
   function handleOnChange(e) {
     let { name, value } = e.target;
     setFinalData({
@@ -71,20 +83,20 @@ export default function FinalizePage() {
       [name]: value,
     });
   }
-
   useEffect(() => {
     dispatch(finalizeAction(finalData));
+    console.log("Final Data: ", finalData);
   }, [finalData]);
 
-  console.log("Final Data_(1st line): " + JSON.stringify(finalData));
+  // console.log("Final Data_(1st line): " + JSON.stringify(finalData));
   let color = finalData.color;
   const bgClr = `${color}bg`;
   const textClr = `${color}text`;
   const fontStl = finalData.fontstyle;
   const fontSz = finalData.fontsize ? finalData.fontsize : "small";
 
-  console.log("COLOR coming from : " + bgClr);
-  console.log("Font Style : " + fontStl);
+  // console.log("COLOR coming from : " + bgClr);
+  // console.log("Font Style : " + fontStl);
 
   return (
     <div className={Styles.finalizeContainer}>
@@ -176,7 +188,17 @@ export default function FinalizePage() {
             </div>
           </div>
           <div className={Styles.underline}></div>
-          <button className={Styles.changeTemplate}>Change Template</button>
+          <button
+            name="sidebar"
+            className={Styles.changeTemplate}
+            onClick={(e) => {
+              handleClickSidebar(e);
+            }}
+          >
+            Change Template
+          </button>
+
+          {finalizeReducer.sidebar==true ? <Sidebar /> : ""}
         </div>
       </div>
     </div>
