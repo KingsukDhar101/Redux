@@ -1,3 +1,9 @@
+function userAction(user){
+  return{
+    type: "user",
+    payload: user,
+  };
+}
 function contactAction(contact) {
   return {
     type: "contact",
@@ -65,4 +71,5 @@ export {
   colorAction,
   fontStyleAction,
   fontSizeAction,
+  userAction,
 };

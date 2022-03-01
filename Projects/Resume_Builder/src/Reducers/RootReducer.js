@@ -7,6 +7,7 @@ import { skillReducer } from "./skillReducer";
 import { finalizeReducer } from "./finalizeReducer";
 import { colorReducer } from "./colorReducer";
 import { fontSizeReducer, fontStyleReducer } from "./fontReducer";
+import {userReducer} from './userReducer';
 
 const rootReducer = combineReducers({
   contactReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   colorReducer,
   fontSizeReducer,
   fontStyleReducer,
+  userReducer,
 });
 
 export default rootReducer;

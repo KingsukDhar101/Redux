@@ -7,13 +7,20 @@
   height: 2.5em;
 }
 .logo {
-  border: 1px solid black;
-  width: 130px;
+  /* border: 1px solid black; */
+  width: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 2.5em;
   color: black;
+  font-family: Georgia;
+  font-weight: bolder;
+  /* font-size: large; */
+}
+.logo > h3 {
+  padding: 0 10px;
+  /* border : 1px solid black; */
 }
 .contents {
   display: flex;
@@ -28,8 +35,8 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  padding: 0 10px;
-  margin: 0 15px;
+  padding: 0 15px;
+  margin: 0 10px;
   background-color: rgba(245, 245, 245, 0.514);
   border-radius: 10px;
   color: black;
@@ -42,4 +49,12 @@
   box-shadow: 1px 1px 1px rgba(204, 204, 204, 0.8),
     -1px 1px 1px rgba(204, 204, 204, 0.8), 1px -1px 1px rgba(204, 204, 204, 0.8),
     -1px -1px 1px rgba(204, 204, 204, 0.8);
+}
+
+.username{
+  padding: 0 15px;
+  cursor: pointer;
+}
+.username:hover{
+background-color: rgba(135, 207, 235, 0.74);
 }

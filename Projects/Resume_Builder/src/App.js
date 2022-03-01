@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./Components/Layout";
-import Home from "./Pages/Home";
+import StartProject from "./Pages/StartProject";
 // import Howto from "./Pages/Howto";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
@@ -40,10 +40,10 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Layout>
-          <Provider store={store}>
+        <Provider store={store}>
+          <Layout>
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<StartProject />} />
               <Route path="/contact" element={<ContactInfo />} />
               <Route path="/experience" element={<Experience />} />
               <Route path="/education" element={<Education />} />
@@ -55,8 +55,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
             </Routes>
-          </Provider>
-        </Layout>
+          </Layout>
+        </Provider>
       </Router>
     </div>
   );
