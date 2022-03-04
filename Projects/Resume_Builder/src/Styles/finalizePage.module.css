@@ -67,6 +67,15 @@ p {
   font-weight: bold;
   padding: 0 20px;
 }
+.name_border {
+  border: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 0 20px;
+  border-radius: 50px;
+}
 
 .contactContainer {
   padding: 3px 0;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userAction } from "../Actions/action";
@@ -12,29 +12,57 @@ import {
 } from "firebase/auth";
 import { Provider } from "react-redux";
 
+import {
+  collection,
+  where,
+  addDoc,
+  doc,
+  deleteDoc,
+  updateDoc,
+  query,
+  onSnapshot,
+  getDocs,
+} from "firebase/firestore";
+import { db } from "../firebase_config";
+
 export default function Login() {
   const dispatch = useDispatch();
   // const { userReducer } = useSelector((state) => state);
 
   const auth = getAuth();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const { userReducer, finalizeReducer } = useSelector((state) => state);
+  const [user, setUser] = useState(userReducer);
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  console.log();
+  useEffect(() => {
+     dispatch(userAction(user));
+    // console.log("user(state): ", user);
+  }, [user]);
 
   async function handleClickWithEP() {
     setLoading(true);
     try {
-      let userData = await signInWithEmailAndPassword(auth, email, password);
-      // console.log("in login : ", userData);
-      dispatch(userAction({ name, email }));
+      let userData = await signInWithEmailAndPassword(
+        auth,
+        user.email,
+        password,
+      );
+      // userData.user.displayName = user.name;
+      // const USER = userData.user;
+      let uuid = userData.user.uid;
+      console.log("@Login: ",userData);
+      setUser({
+        ...user,
+        uid: uuid,
+      });
       setLoading(false);
       alert("Login successful");
-      // console.log("User: ", userReducer);
+      // console.log("User Reducer: ", userReducer);
+      // console.log("USER state : ", user);
       navigate("/");
+      localStorage.setItem("user", JSON.stringify(user));
     } catch (error) {
       setLoading(false);
       alert("Login Unsuccessful");
@@ -65,28 +93,32 @@ export default function Login() {
         <div className={styles.formcard}>
           <h2 className="form-heading center">Enter Login details</h2>
           <div className="form-section">
-            <div className="input-group full">
+            {/* <div className="input-group full">
               <label>Name</label>
               <div className="effect">
                 <input
                   type="text"
                   name="name"
-                  value={name}
                   onChange={(e) => {
-                    setName(e.target.value);
+                    setUser({
+                      ...user,
+                      name: e.target.value,
+                    });
                   }}
                 />
               </div>
-            </div>
+            </div> */}
             <div className="input-group full">
               <label>Email</label>
               <div className="effect">
                 <input
                   type="text"
                   name="email"
-                  value={email}
                   onChange={(e) => {
-                    setEmail(e.target.value);
+                    setUser({
+                      ...user,
+                      email: e.target.value,
+                    });
                   }}
                 />
               </div>

@@ -5,11 +5,14 @@ import { educationAction } from "../Actions/action";
 
 import BaseStyles from "../Styles/base.module.css";
 import Styles from "../Styles/education.module.css";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase_config";
 
 export default function Education() {
   const dispatch = useDispatch();
-  const { educationReducer } = useSelector((state) => state);
+  const { educationReducer, userReducer } = useSelector((state) => state);
   const [education, setEducation] = useState(educationReducer);
+  const [user, setUser] = useState(userReducer);
 
   function handleOnChange(e) {
     let { id, value } = e.target;
@@ -19,8 +22,18 @@ export default function Education() {
     });
   }
 
-  function submitEducation() {
-    dispatch(educationAction(education));
+  async function submitEducation() {
+    try {
+      dispatch(educationAction(education));
+      let docRef = await doc(db, "users", user.uid);
+      let userDetails = {
+        educatiionData: education,
+      };
+      let user1 = await updateDoc(docRef, userDetails);
+      console.log(user1);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   useEffect(() => {

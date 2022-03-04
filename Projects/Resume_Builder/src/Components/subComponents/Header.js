@@ -1,13 +1,33 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import Styles from "../../Styles/header.module.css";
+import { getAuth, signOut } from "firebase/auth";
 
 export default function Header() {
+  const navigate = useNavigate();
   const { userReducer } = useSelector((state) => state);
-  // console.log("User data: ",userReducer);
-  let { name, email } = userReducer;
+  const [email, setEmail] = useState(userReducer.email);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  console.log("User data@ localstorage : ", user);
+
+  function handleLogout() {
+    localStorage.removeItem("user");
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        // Sign-out successful.
+        alert("Logout successfull");
+        navigate("/login");
+      })
+      .catch((error) => {
+        // An error happened.
+        console.log(error);
+        alert("Logout unsuccessfull");
+      });
+  }
 
   return (
     <div className={Styles.headerContainer}>
@@ -25,7 +45,7 @@ export default function Header() {
           <div className={Styles.hLink}>About Us</div>
         </Link>
 
-        {!name && !email ? (
+        {!user ? (
           <>
             <Link to="/signup" style={{ textDecoration: "none" }}>
               <div className={Styles.hLink}>Signup</div>
@@ -35,7 +55,14 @@ export default function Header() {
             </Link>
           </>
         ) : (
-          <div className={`${Styles.hLink} ${Styles.username} `}>{name}</div>
+          <>
+            <div className={`${Styles.hLink} ${Styles.username} `}>
+              {user.email}
+            </div>
+            <button className={`${Styles.hLink_btn}`} onClick={handleLogout}>
+              Logout
+            </button>
+          </>
         )}
       </div>
     </div>

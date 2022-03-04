@@ -5,6 +5,17 @@ import { userAction } from "../Actions/action";
 import Styles from "../Styles/signup.module.css";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  collection,
+  addDoc,
+  doc,
+  deleteDoc,
+  updateDoc,
+  query,
+  onSnapshot,
+  setDoc,
+} from "firebase/firestore";
+import { db } from "../firebase_config";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -13,8 +24,10 @@ export default function Signup() {
   const auth = getAuth();
   const [name, setName] = useState(userReducer.name);
   const [email, setEmail] = useState(userReducer.email);
+  const [uid, setUid] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+ 
   const navigate = useNavigate();
 
   async function handleClick() {
@@ -25,19 +38,38 @@ export default function Signup() {
         email,
         password
       );
-      console.log("User : ", userData);
+      // console.log("User @ Signup : ", userData.user.uid);
+      setUid(userData.user.uid);
+      userData.user.displayName = name;
       setLoading(false);
-      console.log("Name: ", name);
+      // console.log("Name: ", name);
 
-      dispatch(userAction({ name, email }));
+      
+      let docRef = await doc(db, "users",userData.user.uid);
+
+      let userDetails = {
+        "userData": {
+          name,
+          email,
+          uid: userData.user.uid,
+        },
+      };
+      // console.log("UserDetails: ",userDetails)
+      let user1 = await setDoc(docRef, userDetails);
+      // console.log("User1: ", user1);
       alert("Signup successfull");
       navigate("/login");
     } catch (error) {
       setLoading(false);
-      alert("Signup successfull");
+      alert(error.message);
       console.log(error.message);
     }
   }
+
+  useEffect(()=>{
+      dispatch(userAction({ name, email, uid }));
+  },[name, email, uid]);
+
   return (
     <>
       {loading ? (

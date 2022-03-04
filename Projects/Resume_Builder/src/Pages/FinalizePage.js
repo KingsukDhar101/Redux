@@ -8,7 +8,9 @@ import { colorAction } from "../Actions/action";
 import { fontSizeAction, fontStyleAction } from "../Actions/action";
 import Template1 from "./Template1";
 import Template2 from "./Template2";
+
 import Sidebar from "./Sidebar";
+import Template3 from "./Template3";
 
 export default function FinalizePage() {
   const colorArr = [
@@ -31,13 +33,18 @@ export default function FinalizePage() {
   ];
 
   const dispatch = useDispatch();
-  const { finalizeReducer, colorReducer, fontSizeReducer, fontStyleReducer } =
-    useSelector((state) => state);
+  const {
+    finalizeReducer,
+    colorReducer,
+    fontSizeReducer,
+    fontStyleReducer,
+    userReducer,
+  } = useSelector((state) => state);
 
   const [finalData, setFinalData] = useState(finalizeReducer);
   // const [color, setColor] = useState(colorReducer);
-  const [fontsize, setFontsize] = useState(fontSizeReducer);
-  const [fontstyle, setFontstyle] = useState(fontStyleReducer);
+  // const [fontsize, setFontsize] = useState(fontSizeReducer);
+  // const [fontstyle, setFontstyle] = useState(fontStyleReducer);
   // const [template, setTemplate] = useState(finalizeReducer.template);
   // const [sidebar, setSidebar] = useState(false);
   let template = finalizeReducer.template;
@@ -64,11 +71,15 @@ export default function FinalizePage() {
 
   function handleClick(e) {
     let { name, value } = e.target;
+    // if(finalizeReducer.sidebar !== true){
+    //   setFinalData(finalizeReducer)
+    // }
     setFinalData({
       ...finalData,
+      sidebar: false,
       [name]: value,
     });
-    dispatch(finalizeAction(finalData));
+    // dispatch(finalizeAction(finalData));
   }
   function handleClickSidebar(e) {
     let { name } = e.target;
@@ -84,6 +95,10 @@ export default function FinalizePage() {
       [name]: value,
     });
   }
+  // useEffect(()=>{
+  //   if(finalizeReducer.sidebar == false )
+  //   setFinalData(finalizeReducer)
+  // })
   useEffect(() => {
     dispatch(finalizeAction(finalData));
     console.log("Final Data: ", finalData);
@@ -96,14 +111,12 @@ export default function FinalizePage() {
   const fontStl = finalData.fontstyle;
   const fontSz = finalData.fontsize ? finalData.fontsize : "small";
 
-  
-
   // console.log("COLOR coming from : " + bgClr);
   // console.log("Font Style : " + fontStl);
 
   return (
     <div className={Styles.finalizeContainer}>
-      {template == 1 ? (
+      {(template == 1 && (
         <Template1
           fontSz={fontSz}
           bgClr={bgClr}
@@ -115,19 +128,33 @@ export default function FinalizePage() {
           summary={summary}
           newSk={newSk}
         />
-      ) : (
-        <Template2
-          fontSz={fontSz}
-          bgClr={bgClr}
-          textClr={textClr}
-          fontStl={fontStl}
-          cd={cd}
-          ex={ex}
-          edu={edu}
-          summary={summary}
-          newSk={newSk}
-        />
-      )}
+      )) ||
+        (template == 2 && (
+          <Template2
+            fontSz={fontSz}
+            bgClr={bgClr}
+            textClr={textClr}
+            fontStl={fontStl}
+            cd={cd}
+            ex={ex}
+            edu={edu}
+            summary={summary}
+            newSk={newSk}
+          />
+        )) ||
+        (template == 3 && (
+          <Template3
+            fontSz={fontSz}
+            bgClr={bgClr}
+            textClr={textClr}
+            fontStl={fontStl}
+            cd={cd}
+            ex={ex}
+            edu={edu}
+            summary={summary}
+            newSk={newSk}
+          />
+        ))}
 
       <div className={Styles.rightContainer}>
         <div className={Styles.contentContainer}>
@@ -201,8 +228,7 @@ export default function FinalizePage() {
             Change Template
           </button>
 
-          {finalizeReducer.sidebar==true ? <Sidebar /> : ""}
-          {}
+          {finalizeReducer.sidebar === true ? <Sidebar /> : ""}
         </div>
       </div>
     </div>

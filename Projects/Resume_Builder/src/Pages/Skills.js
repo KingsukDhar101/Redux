@@ -4,15 +4,19 @@ import BaseStyles from "../Styles/base.module.css";
 import Styles from "../Styles/skills.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch, useSelector } from "react-redux";
-import {skillAction} from '../Actions/action';
+import { skillAction } from "../Actions/action";
+
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase_config";
 
 export default function Skills() {
   const dispatch = useDispatch();
-  const {skillReducer} = useSelector(state => state);
+  const { skillReducer, userReducer } = useSelector((state) => state);
   const [skillData, setSkillData] = useState(skillReducer);
+  const [user, setUser] = useState(userReducer);
 
   function handleOnChange(e, id) {
-    let prevObj = skillData.find(item => item.id == id);
+    let prevObj = skillData.find((item) => item.id == id);
     prevObj.skill = e.target.value;
     setSkillData([...skillData]);
   }
@@ -32,12 +36,24 @@ export default function Skills() {
     // console.log(newArr);
     setSkillData(newArr);
   }
-  function submitSkills(){
-    dispatch(skillAction(skillData));
+  async function submitSkills() {
+    try {
+      let newArr = skillData.filter((ele) => ele.skill !== "");
+
+      if (newArr.length > 0) {
+        dispatch(skillAction(newArr));
+        let docRef = await doc(db, "users", user.uid);
+        let userDetails = {
+          skillData: newArr,
+        };
+        let user1 = await updateDoc(docRef, userDetails);
+        console.log(user1);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
-  useEffect(() => {
-    console.log(skillData);
-  }, [skillData]);
+  useEffect(() => {}, [skillData]);
   return (
     <div>
       <div className={BaseStyles.leftContainer}>
@@ -81,7 +97,9 @@ export default function Skills() {
 
         <div className={BaseStyles.pageSlider}>
           <Link to="/summary">
-            <button className={BaseStyles.submitBtn} onClick={submitSkills}>SAVE & CONTINUE</button>
+            <button className={BaseStyles.submitBtn} onClick={submitSkills}>
+              SAVE & CONTINUE
+            </button>
           </Link>
 
           <div className={BaseStyles.back}>

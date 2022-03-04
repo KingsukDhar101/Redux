@@ -4,12 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { experienceAction } from "../Actions/action";
 import BaseStyles from "../Styles/base.module.css";
 import Styles from "../Styles/experience.module.css";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase_config";
 
 export default function Experience() {
   const dispatch = useDispatch();
-  const { experienceReducer } = useSelector((state) => state);
+  const { experienceReducer, userReducer } = useSelector((state) => state);
   const [experience, setExperience] = useState(experienceReducer);
   const [checkvalue, setCheckvalue] = useState(true);
+  const [user, setUser] = useState(userReducer);
   // const [sample, setSample] = useState("");
 
   function handleOnChange(e) {
@@ -19,8 +22,22 @@ export default function Experience() {
       [id]: value,
     });
   }
-  function submitExperience() {
-    dispatch(experienceAction(experience));
+  async function submitExperience() {
+    try {
+      dispatch(experienceAction(experience));
+      console.log(user.uid);
+      let docRef = await doc(db, "users", user.uid);
+
+      let userDetails = {
+        experienceData: experience,
+      };
+
+      // console.log("UserDetails: ",userDetails)
+      let user1 = await updateDoc(docRef, userDetails);
+      console.log(user1);
+    } catch (err) {
+      console.log(err);
+    }
   }
   function checkFunc() {
     setCheckvalue((prevState) => !prevState);
@@ -75,7 +92,6 @@ export default function Experience() {
         <div className={Styles.dateContainer}>
           <div className={Styles.month}>
             <select
-              
               name="month"
               className={Styles.smalltext}
               placeholder="month"
@@ -99,7 +115,6 @@ export default function Experience() {
           </div>
           <div className={Styles.year}>
             <select
-              
               name="year"
               className={Styles.smalltext}
               placeholder="year"
@@ -129,7 +144,6 @@ export default function Experience() {
             <div className={Styles.dateContainer}>
               <div className={Styles.month}>
                 <select
-                  
                   name="month"
                   className={Styles.smalltext}
                   placeholder="month"
@@ -153,7 +167,6 @@ export default function Experience() {
               </div>
               <div className={Styles.year}>
                 <select
-                 
                   name="year"
                   className={Styles.smalltext}
                   placeholder="year"

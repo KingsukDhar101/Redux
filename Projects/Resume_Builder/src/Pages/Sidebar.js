@@ -11,16 +11,25 @@ export default function Sidebar() {
   // console.log("Data @ sidebar : ", finalizeReducer);
   // let sbopen = finalizeReducer.sidebar;
 
+  function handleTemplateChange(e){
+    let {name, id} = e.target;
+    console.log(name, id);
+    setFinaldata({
+      ...finaldata,
+      [name]: id
+    });
+  }
   function handleClickSidebar(e) {
     let { name } = e.target;
     setFinaldata({
       ...finaldata,
-      [name]: false,
+      [name]: false
     });
     // console.log("Cross click: ",finaldata);
   }
   useEffect(() => {
     dispatch(finalizeAction(finaldata));
+    console.log("Final call: ")
   }, [finaldata]);
 
   return (
@@ -35,8 +44,33 @@ export default function Sidebar() {
         X
       </button>
       <div className={Styles.box}>
-        <img src="" alt="" />
-        <img src="" alt="" />
+        <button
+          id="1"
+          name="template"
+          onClick={(e) => {
+            handleTemplateChange(e);
+          }}
+        >
+          template-1
+        </button>
+        <button
+          id="2"
+          name="template"
+          onClick={(e) => {
+            handleTemplateChange(e);
+          }}
+        >
+          template-2
+        </button>
+        <button
+          id="3"
+          name="template"
+          onClick={(e) => {
+            handleTemplateChange(e);
+          }}
+        >
+          template-3
+        </button>
       </div>
     </div>
   );

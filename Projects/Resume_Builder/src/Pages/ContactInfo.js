@@ -5,10 +5,14 @@ import Styles from "../Styles/contactInfo.module.css";
 // import { useDispatch } from "react-redux";
 import { useSelector, useDispatch } from "react-redux";
 import { contactAction } from "../Actions/action";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "../firebase_config";
+
 export default function Education() {
   const dispatch = useDispatch();
-  const { contactReducer } = useSelector((state) => state);
+  const { contactReducer, userReducer } = useSelector((state) => state);
   const [contact, setContact] = useState(contactReducer);
+  const [user, setUser] = useState(userReducer);
 
   function handleOnChange(e) {
     // console.log(e.target.value);
@@ -19,11 +23,24 @@ export default function Education() {
       [id]: value,
     });
   }
-  function submitContact() {
-    dispatch(contactAction(contact));
+  async function submitContact() {
+    try {
+      dispatch(contactAction(contact));
+      console.log(user.uid);
+      let docRef = await doc(db, "users", user.uid);
+
+      let userDetails = {
+        contactData: contact,
+      };
+
+      let user1 = await updateDoc(docRef, userDetails);
+      console.log(user1);
+    } catch (err) {
+      console.log(err);
+    }
   }
   useEffect(() => {
-    // console.log(contactReducer);
+    console.log("User: ", user);
   }, []);
   return (
     <div>

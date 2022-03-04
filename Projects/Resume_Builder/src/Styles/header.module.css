@@ -29,7 +29,7 @@
   /* border: 1px solid black; */
   flex: 1;
 }
-.hLink {
+.hLink, .hLink_btn {
   /* border: 2px solid red; */
   display: flex;
   align-items: center;
@@ -41,15 +41,20 @@
   border-radius: 10px;
   color: black;
 }
-.hLink:hover {
+.hLink_btn{
+  width: 5em;
+}
+.hLink:hover, .hLink_btn:hover {
   /* border: 1px solid #ccc; */
   background-color: wheat;
 }
-.hLink:active {
+.hLink:active, .hLink_btn:active {
   box-shadow: 1px 1px 1px rgba(204, 204, 204, 0.8),
     -1px 1px 1px rgba(204, 204, 204, 0.8), 1px -1px 1px rgba(204, 204, 204, 0.8),
     -1px -1px 1px rgba(204, 204, 204, 0.8);
 }
+
+
 
 .username{
   padding: 0 15px;
