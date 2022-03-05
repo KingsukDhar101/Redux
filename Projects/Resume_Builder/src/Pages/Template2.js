@@ -15,20 +15,20 @@ export default function Template2({
 }) {
   return (
     <>
-      <div className={`${Styles.leftContainer}  ${fontSz}`}>
+      <div className={`${Styles.leftContainer}  ${fontSz}`} id="invoice">
         <div className={t2s.headingContainer} style={{ display: "flex" }}>
           <div className={t2s.nameContainer}>
             {/* <div className={`${Styles.nameLogo} ${bgClr}`}>KD</div> */}
-            <div className={`${Styles.name} ${fontStl} name`}>Kingsuk Dhar</div>
+            <div className={`${Styles.name} ${fontStl} name`}>{cd.name}</div>
           </div>
           <div className={t2s.contactContainer} style={{ marginLeft: "auto" }}>
             <div className={` ${fontStl} `}>
-              {/* {cd.phoneno} */}
-              1234567890
+              {cd.phoneno}
+              {/* 1234567890 */}
             </div>
             <div className={` ${fontStl}`}>
-              {/* {cd.email} */}
-              kingsuK@gamil.com
+              {cd.email}
+              {/* kingsuK@gamil.com */}
             </div>
             <div className={` ${fontStl}`}>{cd.address}</div>
             <div className={` ${fontStl}`}>
@@ -45,11 +45,13 @@ export default function Template2({
           <div className={t2s.exContentContainer}>
             <div className={Styles.left}>
               <div className={` ${fontStl}`} style={{ marginBottom: "5px" }}>
-                {ex.jobtitle} Software Engineer
+                {ex.jobtitle}
+                {/* Software Engineer */}
               </div>
 
               <span className={`${fontStl}`}>
-                {ex.company} | {ex.city}, {ex.country} Mercer Gurgaon , Hariyana
+                {ex.company} | {ex.city}, {ex.country}
+                {/* Mercer Gurgaon , Hariyana */}
               </span>
             </div>
             <div className={Styles.right}>
@@ -97,12 +99,13 @@ export default function Template2({
           <div className={t2s.exContentContainer}>
             <div className={Styles.left}>
               <div className={` ${fontStl}`} style={{ marginBottom: "5px" }}>
-                {edu.degree} degree
+                {edu.degree}
+                {/* degree */}
               </div>
               <div className={` ${fontStl}`}>
                 <span className={`${fontStl}`}>
                   {edu.school} | {edu.city}, {edu.country}
-                  school | city, country
+                  {/* school | city, country */}
                 </span>
               </div>
             </div>
@@ -110,7 +113,7 @@ export default function Template2({
               <div className={` ${fontStl}`}>
                 <span className={`${fontStl}`} style={{ marginBottom: "5px" }}>
                   {edu.gradmonth} {edu.gradyear}
-                  gradmonth gradyear
+                  {/* gradmonth gradyear */}
                 </span>
               </div>
             </div>
@@ -127,11 +130,10 @@ export default function Template2({
             {summary}
           </div>
         </div>
-
-        <div className={Styles.pageSlider}>
-          <div className={Styles.back}>
-            <Link to="/summary">Back</Link>
-          </div>
+      </div>
+      <div className={Styles.pageSlider}>
+        <div className={Styles.back}>
+          <Link to="/summary">Back</Link>
         </div>
       </div>
     </>

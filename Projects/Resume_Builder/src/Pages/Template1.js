@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 import Styles from "../Styles/finalizePage.module.css";
 export default function Template1({
   fontSz,
@@ -14,18 +14,19 @@ export default function Template1({
 }) {
   return (
     <>
-      <div className={`${Styles.leftContainer}  ${fontSz}`}>
+      <div className={`${Styles.leftContainer}  ${fontSz}`} id="invoice">
         <div className={Styles.headingContainer}>
           <div className={Styles.topContainer}>
             <div className={`${Styles.nameLogo} ${bgClr}`}>KD</div>
             <div className={`${Styles.name} ${textClr} ${fontStl} name`}>
-              Kingsuk Dhar
+              {cd.name}
+              {/* Kingsuk Dhar */}
             </div>
           </div>
           <div className={Styles.contactContainer}>
             <div className={` ${fontStl} `}>
-              {/* {cd.phoneno} | {cd.email} */}
-              1234567890 | kingsuK@gamil.com
+              {cd.phoneno} | {cd.email}
+              {/* 1234567890 | kingsuK@gamil.com */}
             </div>
             <div className={` ${fontStl}`}>
               {cd.address} | {cd.city}, {cd.country}
@@ -41,12 +42,13 @@ export default function Template1({
           <div className={Styles.exContentContainer}>
             <div className={Styles.left}>
               <div className={` ${fontStl}`} style={{ marginBottom: "5px" }}>
-                {ex.jobtitle} Software Engineer
+                {ex.jobtitle}
+                {/* Software Engineer */}
               </div>
               <div className={``}>
                 <span className={`${fontStl}`}>
-                  {ex.company} | {ex.city}, {ex.country} Mercer Gurgaon ,
-                  Hariyana
+                  {ex.company} | {ex.city}, {ex.country}
+                  {/* Mercer Gurgaon, Hariyana */}
                 </span>
               </div>
             </div>
@@ -121,11 +123,10 @@ export default function Template1({
             {summary}
           </div>
         </div>
-
-        <div className={Styles.pageSlider}>
-          <div className={Styles.back}>
-            <Link to="/summary">Back</Link>
-          </div>
+      </div>
+      <div className={Styles.pageSlider}>
+        <div className={Styles.back}>
+          <Link to="/summary">Back</Link>
         </div>
       </div>
     </>

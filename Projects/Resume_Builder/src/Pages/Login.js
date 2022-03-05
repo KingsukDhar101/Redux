@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userAction } from "../Actions/action";
-import styles from "../Styles/login.module.css";
+import Styles from "../Styles/signup.module.css";
 
 import {
   getAuth,
@@ -37,7 +37,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-     dispatch(userAction(user));
+    dispatch(userAction(user));
     // console.log("user(state): ", user);
   }, [user]);
 
@@ -47,12 +47,12 @@ export default function Login() {
       let userData = await signInWithEmailAndPassword(
         auth,
         user.email,
-        password,
+        password
       );
       // userData.user.displayName = user.name;
       // const USER = userData.user;
       let uuid = userData.user.uid;
-      console.log("@Login: ",userData);
+      console.log("@Login: ", userData);
       setUser({
         ...user,
         uid: uuid,
@@ -61,8 +61,12 @@ export default function Login() {
       alert("Login successful");
       // console.log("User Reducer: ", userReducer);
       // console.log("USER state : ", user);
+      let usd = {
+        email: userData.user.email,
+        uid: userData.user.uid,
+      };
+      localStorage.setItem("user", JSON.stringify(usd));
       navigate("/");
-      localStorage.setItem("user", JSON.stringify(user));
     } catch (error) {
       setLoading(false);
       alert("Login Unsuccessful");
@@ -90,62 +94,41 @@ export default function Login() {
       {loading ? (
         "Loading"
       ) : (
-        <div className={styles.formcard}>
-          <h2 className="form-heading center">Enter Login details</h2>
-          <div className="form-section">
-            {/* <div className="input-group full">
-              <label>Name</label>
-              <div className="effect">
-                <input
-                  type="text"
-                  name="name"
-                  onChange={(e) => {
-                    setUser({
-                      ...user,
-                      name: e.target.value,
-                    });
-                  }}
-                />
-              </div>
-            </div> */}
-            <div className="input-group full">
-              <label>Email</label>
-              <div className="effect">
-                <input
-                  type="text"
-                  name="email"
-                  onChange={(e) => {
-                    setUser({
-                      ...user,
-                      email: e.target.value,
-                    });
-                  }}
-                />
-              </div>
+        <div className={Styles.formCard}>
+          <h2 className={Styles.formHeading}>Enter Login details</h2>
+          <div className={Styles.formContainer}>
+            <div className={Styles.inputContainer}>
+              <label className={Styles.label}>Email</label>
+              <input
+                type="text"
+                name="email"
+                className={Styles.input}
+                onChange={(e) => {
+                  setUser({
+                    ...user,
+                    email: e.target.value,
+                  });
+                }}
+              />
             </div>
-            <div className="input-group full">
-              <label>Password</label>
-              <div className="effect">
-                <input
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                />
-              </div>
+            <div className={Styles.inputContainer}>
+              <label className={Styles.label}>Password</label>
+              <input
+                type="password"
+                name="password"
+                className={Styles.input}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
             </div>
-            <div className="form-buttons">
-              <button
-                className="btn hvr-float-shadow"
-                type="button"
-                onClick={handleClickWithEP}
-              >
+            <div className={Styles.btnContainer}>
+              <button className="btn" type="button" onClick={handleClickWithEP}>
                 Login
               </button>
               <button
-                className="btn hvr-float-shadow"
+                className={Styles.btn}
                 style={{ backgroundColor: "skyblue" }}
                 type="button"
                 onClick={handleClickWithGoogle}

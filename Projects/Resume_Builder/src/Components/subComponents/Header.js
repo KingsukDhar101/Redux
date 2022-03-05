@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,9 +9,14 @@ export default function Header() {
   const navigate = useNavigate();
   const { userReducer } = useSelector((state) => state);
   const [email, setEmail] = useState(userReducer.email);
+  const [username, setUsername] = useState("");
 
   const user = JSON.parse(localStorage.getItem("user"));
   console.log("User data@ localstorage : ", user);
+  
+  useEffect(()=>{
+    setUsername(user);
+  },[]);
 
   function handleLogout() {
     localStorage.removeItem("user");

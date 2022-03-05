@@ -12,6 +12,10 @@ import Template2 from "./Template2";
 import Sidebar from "./Sidebar";
 import Template3 from "./Template3";
 
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
+import html2pdf from 'html2pdf.js';
+
 export default function FinalizePage() {
   const colorArr = [
     "black",
@@ -77,6 +81,7 @@ export default function FinalizePage() {
     setFinalData({
       ...finalData,
       sidebar: false,
+      template,
       [name]: value,
     });
     // dispatch(finalizeAction(finalData));
@@ -85,6 +90,7 @@ export default function FinalizePage() {
     let { name } = e.target;
     setFinalData({
       ...finalData,
+      template,
       [name]: true,
     });
   }
@@ -92,6 +98,7 @@ export default function FinalizePage() {
     let { name, value } = e.target;
     setFinalData({
       ...finalData,
+      template,
       [name]: value,
     });
   }
@@ -101,7 +108,7 @@ export default function FinalizePage() {
   // })
   useEffect(() => {
     dispatch(finalizeAction(finalData));
-    console.log("Final Data: ", finalData);
+    console.log("Final Data_finalPage: ", finalData);
   }, [finalData]);
 
   // console.log("Final Data_(1st line): " + JSON.stringify(finalData));
@@ -114,10 +121,37 @@ export default function FinalizePage() {
   // console.log("COLOR coming from : " + bgClr);
   // console.log("Font Style : " + fontStl);
 
+  // const downloadResume = () => {
+  //   const input = document.getElementById("resumeCapture");
+  //   html2canvas(input, {
+  //     windowWidth: "100%",
+  //   }).then((canvas) => {
+  //     const img = canvas.toDataURL("image/png");
+  //     const pdf = new jsPDF("p", "px", "a4");
+  //     var width = pdf.internal.pageSize.getWidth();
+  //     var height = pdf.internal.pageSize.getHeight();
+  //     pdf.addImage(img, "JPEG", 0, 0, width, height);
+  //     pdf.save("resume.pdf");
+  //   });
+  // };
+
+  function generatePDF() {
+    // Choose the element that our invoice is rendered in.
+    const element = document.getElementById("invoice");
+    // Choose the element and save the PDF for our user.
+    var opt = {
+      filename: "myfile.pdf",
+      image: { type: "jpeg", quality: 0.98 },
+      html2canvas: { scale: 1 },
+      jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+    };
+    html2pdf().from(element).set(opt).save();
+  }
+
   return (
     <div className={Styles.finalizeContainer}>
-      {(template == 1 && (
-        <Template1
+      {(template == 2 && (
+        <Template2
           fontSz={fontSz}
           bgClr={bgClr}
           textClr={textClr}
@@ -129,8 +163,8 @@ export default function FinalizePage() {
           newSk={newSk}
         />
       )) ||
-        (template == 2 && (
-          <Template2
+        (template == 3 && (
+          <Template3
             fontSz={fontSz}
             bgClr={bgClr}
             textClr={textClr}
@@ -142,8 +176,8 @@ export default function FinalizePage() {
             newSk={newSk}
           />
         )) ||
-        (template == 3 && (
-          <Template3
+        (template == 1 && (
+          <Template1
             fontSz={fontSz}
             bgClr={bgClr}
             textClr={textClr}
@@ -161,7 +195,9 @@ export default function FinalizePage() {
           <h4>Here's Your Resume!</h4>
           <p>What do you want to do next?</p>
           <div className={Styles.midHeading}>Export Options</div>
-          <button className={Styles.download}>Download</button>
+          <button className={Styles.download} onClick={generatePDF}>
+            Download
+          </button>
           <button className={Styles.print}>Print</button>
           <button className={Styles.email}>Email</button>
           <div className={Styles.underline}></div>

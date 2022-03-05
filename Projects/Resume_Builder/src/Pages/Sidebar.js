@@ -9,7 +9,8 @@ export default function Sidebar() {
   const [finaldata, setFinaldata] = useState(finalizeReducer);
 
   // console.log("Data @ sidebar : ", finalizeReducer);
-  // let sbopen = finalizeReducer.sidebar;
+  let sbopen = finalizeReducer.sidebar;
+   
 
   function handleTemplateChange(e){
     let {name, id} = e.target;
@@ -29,7 +30,7 @@ export default function Sidebar() {
   }
   useEffect(() => {
     dispatch(finalizeAction(finaldata));
-    console.log("Final call: ")
+    // console.log("Final call_sidebar: ",finalizeReducer)
   }, [finaldata]);
 
   return (

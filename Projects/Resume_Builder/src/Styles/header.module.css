@@ -3,23 +3,31 @@
   align-items: center;
   justify-content: center;
   /* border: 1px solid greenyellow; */
+  padding: 6px 0;
   width: 100%;
-  height: 2.5em;
+  height: 100%;
+  background-color: rgba(68, 185, 231, 0.767);
 }
 .logo {
-  /* border: 1px solid black; */
-  width: 150px;
+  border: 1px solid rgba(204, 204, 204, 0.548);
+  width: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 2.5em;
+  height: 100%;
   color: black;
   font-family: Georgia;
+  font-size: 1.4em;
   font-weight: bolder;
   /* font-size: large; */
+  text-decoration: none;
 }
 .logo > h3 {
-  padding: 0 10px;
+  padding: 5px 20px;
+  background: -webkit-linear-gradient(red, rgb(0, 0, 1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-decoration: none;
   /* border : 1px solid black; */
 }
 .contents {
@@ -29,7 +37,8 @@
   /* border: 1px solid black; */
   flex: 1;
 }
-.hLink, .hLink_btn {
+.hLink,
+.hLink_btn {
   /* border: 2px solid red; */
   display: flex;
   align-items: center;
@@ -41,25 +50,25 @@
   border-radius: 10px;
   color: black;
 }
-.hLink_btn{
+.hLink_btn {
   width: 5em;
 }
-.hLink:hover, .hLink_btn:hover {
+.hLink:hover,
+.hLink_btn:hover {
   /* border: 1px solid #ccc; */
   background-color: wheat;
 }
-.hLink:active, .hLink_btn:active {
+.hLink:active,
+.hLink_btn:active {
   box-shadow: 1px 1px 1px rgba(204, 204, 204, 0.8),
     -1px 1px 1px rgba(204, 204, 204, 0.8), 1px -1px 1px rgba(204, 204, 204, 0.8),
     -1px -1px 1px rgba(204, 204, 204, 0.8);
 }
 
-
-
-.username{
+.username {
   padding: 0 15px;
   cursor: pointer;
 }
-.username:hover{
-background-color: rgba(135, 207, 235, 0.74);
+.username:hover {
+  background-color: wheat;
 }

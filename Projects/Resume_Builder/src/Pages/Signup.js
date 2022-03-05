@@ -27,7 +27,7 @@ export default function Signup() {
   const [uid, setUid] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
- 
+
   const navigate = useNavigate();
 
   async function handleClick() {
@@ -44,11 +44,10 @@ export default function Signup() {
       setLoading(false);
       // console.log("Name: ", name);
 
-      
-      let docRef = await doc(db, "users",userData.user.uid);
+      let docRef = await doc(db, "users", userData.user.uid);
 
       let userDetails = {
-        "userData": {
+        userData: {
           name,
           email,
           uid: userData.user.uid,
@@ -66,59 +65,56 @@ export default function Signup() {
     }
   }
 
-  useEffect(()=>{
-      dispatch(userAction({ name, email, uid }));
-  },[name, email, uid]);
+  useEffect(() => {
+    dispatch(userAction({ name, email, uid }));
+  }, [name, email, uid]);
 
   return (
     <>
       {loading ? (
         "Loading"
       ) : (
-        <div className={Styles.formcard}>
-          <h2 className="form-heading center">Enter Login details</h2>
-          <div className="form-section">
-            <div className="input-group full">
-              <label>Name</label>
-              <div className="effect">
-                <input
-                  type="text"
-                  name="name"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                />
-              </div>
+        <div className={Styles.formCard}>
+          <h2 className={Styles.formHeading}>Enter Signup details</h2>
+          <div className={Styles.formContainer}>
+            <div className={Styles.inputContainer}>
+              <label className={Styles.label}>Name</label>
+              <input
+                type="text"
+                name="name"
+                value={name}
+                className={Styles.input}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
             </div>
-            <div className="input-group full">
-              <label>Email</label>
-              <div className="effect">
-                <input
-                  type="text"
-                  name="email"
-                  value={email}
-                  onChange={(e) => {
-                    setEmail(e.target.value);
-                  }}
-                />
-              </div>
+            <div className={Styles.inputContainer}>
+              <label className={Styles.label}>Email</label>
+              <input
+                type="text"
+                name="email"
+                value={email}
+                className={Styles.input}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
             </div>
-            <div className="input-group full">
-              <label>Password</label>
-              <div className="effect">
-                <input
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                  }}
-                />
-              </div>
+            <div className={Styles.inputContainer}>
+              <label className={Styles.label}>Password</label>
+              <input
+                type="password"
+                name="password"
+                value={password}
+                className={Styles.input}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+              />
             </div>
-            <div className="form-buttons" onClick={handleClick}>
-              <button className="btn hvr-float-shadow" type="button">
+            <div className={Styles.btnContainer} onClick={handleClick}>
+              <button className={Styles.btn} type="button">
                 Signup
               </button>
             </div>
