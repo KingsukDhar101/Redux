@@ -14,7 +14,7 @@ import Template3 from "./Template3";
 
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-import html2pdf from 'html2pdf.js';
+import html2pdf from "html2pdf.js";
 
 export default function FinalizePage() {
   const colorArr = [
@@ -51,6 +51,7 @@ export default function FinalizePage() {
   // const [fontstyle, setFontstyle] = useState(fontStyleReducer);
   // const [template, setTemplate] = useState(finalizeReducer.template);
   // const [sidebar, setSidebar] = useState(false);
+  const [temp, setTemp] = useState(false);
   let template = finalizeReducer.template;
 
   const allData = useSelector((state) => state);
@@ -100,6 +101,14 @@ export default function FinalizePage() {
       ...finalData,
       template,
       [name]: value,
+    });
+  }
+  function handleTemplateChange(e) {
+    let { name, id } = e.target;
+    console.log(name, id);
+    setFinalData({
+      ...finalData,
+      [name]: id,
     });
   }
   // useEffect(()=>{
@@ -192,24 +201,18 @@ export default function FinalizePage() {
 
       <div className={Styles.rightContainer}>
         <div className={Styles.contentContainer}>
-          <h4>Here's Your Resume!</h4>
-          <p>What do you want to do next?</p>
+          <h4 style={{ fontSize: "2.2em", letterSpacing: "5px" }}>
+            Your Resume
+          </h4>
+          <p style={{ letterSpacing: "2px" }}>What do you want to do next?</p>
           <div className={Styles.midHeading}>Export Options</div>
           <button className={Styles.download} onClick={generatePDF}>
             Download
           </button>
-          <button className={Styles.print}>Print</button>
-          <button className={Styles.email}>Email</button>
+
           <div className={Styles.underline}></div>
           <div className={Styles.midHeading}>Formatting Options</div>
-          <div className={Styles.layoutContainer}>
-            <div className={Styles.smallHeading}>layout</div>
-            <div className={Styles.layoutContainerBtn}>
-              <button className={Styles.condensed}>CONDENSED</button>
-              <button className={Styles.standard}>STANDARD</button>
-              <button className={Styles.expanded}>EXPANDED</button>
-            </div>
-          </div>
+
           <div className={Styles.fontContainer}>
             <div className={Styles.fontStyleContainer}>
               <div className={Styles.smallHeading}>Font Style</div>
@@ -257,14 +260,45 @@ export default function FinalizePage() {
           <button
             name="sidebar"
             className={Styles.changeTemplate}
-            onClick={(e) => {
-              handleClickSidebar(e);
+            onClick={() => {
+              setTemp(!temp);
             }}
           >
             Change Template
           </button>
+          {temp && (
+            <div className={Styles.templateContainer}>
+              <button
+                id="1"
+                name="template"
+                onClick={(e) => {
+                  handleTemplateChange(e);
+                }}
+              >
+                template-1
+              </button>
+              <button
+                id="2"
+                name="template"
+                onClick={(e) => {
+                  handleTemplateChange(e);
+                }}
+              >
+                template-2
+              </button>
+              <button
+                id="3"
+                name="template"
+                onClick={(e) => {
+                  handleTemplateChange(e);
+                }}
+              >
+                template-3
+              </button>
+            </div>
+          )}
 
-          {finalizeReducer.sidebar === true ? <Sidebar /> : ""}
+          {/* {finalizeReducer.sidebar === true ? <Sidebar /> : ""} */}
         </div>
       </div>
     </div>

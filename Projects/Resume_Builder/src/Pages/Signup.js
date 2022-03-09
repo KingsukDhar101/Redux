@@ -3,18 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { userAction } from "../Actions/action";
 import Styles from "../Styles/signup.module.css";
+import M from "materialize-css";
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import {
-  collection,
-  addDoc,
-  doc,
-  deleteDoc,
-  updateDoc,
-  query,
-  onSnapshot,
-  setDoc,
-} from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../firebase_config";
 
 export default function Signup() {
@@ -56,7 +48,7 @@ export default function Signup() {
       // console.log("UserDetails: ",userDetails)
       let user1 = await setDoc(docRef, userDetails);
       // console.log("User1: ", user1);
-      alert("Signup successfull");
+      // M.toast({ html: "Signup successfull", classes: "rounded", color: "green" });
       navigate("/login");
     } catch (error) {
       setLoading(false);

@@ -43,10 +43,8 @@ export default function Header() {
       </Link>
 
       <div className={Styles.contents}>
-        <Link to="/signup" style={{ textDecoration: "none" }}>
-          <div className={Styles.hLink}>Resume Templates</div>
-        </Link>
-        <Link to="/signup" style={{ textDecoration: "none" }}>
+        
+        <Link to="/aboutus" style={{ textDecoration: "none" }}>
           <div className={Styles.hLink}>About Us</div>
         </Link>
 

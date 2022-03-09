@@ -12,18 +12,18 @@ import {
 } from "firebase/auth";
 import { Provider } from "react-redux";
 
-import {
-  collection,
-  where,
-  addDoc,
-  doc,
-  deleteDoc,
-  updateDoc,
-  query,
-  onSnapshot,
-  getDocs,
-} from "firebase/firestore";
-import { db } from "../firebase_config";
+// import {
+//   collection,
+//   where,
+//   addDoc,
+//   doc,
+//   deleteDoc,
+//   updateDoc,
+//   query,
+//   onSnapshot,
+//   getDocs,
+// } from "firebase/firestore";
+// import { db } from "../firebase_config";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -124,12 +124,16 @@ export default function Login() {
               />
             </div>
             <div className={Styles.btnContainer}>
-              <button className="btn" type="button" onClick={handleClickWithEP}>
+              <button
+                className={Styles.btn}
+                type="button"
+                onClick={handleClickWithEP}
+              >
                 Login
               </button>
               <button
                 className={Styles.btn}
-                style={{ backgroundColor: "skyblue" }}
+                style={{ backgroundColor: "yellowgreen" }}
                 type="button"
                 onClick={handleClickWithGoogle}
               >
